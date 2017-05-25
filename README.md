@@ -167,7 +167,7 @@ export class CloudController {
 #### Other RequestParam options
 ```javascript
 {
-    required: false // Defaults to true
+    required: false, // Defaults to true
     default: any // The default value to use as a fallback when the request parameter is not provided or has an empty value.
                  // Supplying a default value implicitly sets required to false.
 }
