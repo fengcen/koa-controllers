@@ -1,0 +1,39 @@
+{
+  "name": "koa-controllers",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Koa controllers with TypeScript Decorators.",
+  "main": "index.js",
+  "repository": "https://github.com/fengcen/koa-controllers.git",
+  "author": "fengcen <fengcen.love@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^7.1.2",
+    "koa-bodyparser": "^4.2.0",
+    "koa-multer": "^1.0.1",
+    "koa-router": "^7.2.0",
+    "lodash": "^4.17.4",
+    "reflect-metadata": "^0.1.10"
+  },
+  "devDependencies": {
+    "@types/del": "^2.2.32",
+    "@types/glob": "^5.0.30",
+    "@types/gulp": "^4.0.3",
+    "@types/gulp-replace": "^0.0.30",
+    "@types/gulp-shell": "^0.0.30",
+    "@types/gulp-sourcemaps": "^0.0.30",
+    "@types/gulp-typescript": "^2.13.0",
+    "@types/koa-bodyparser": "^3.0.23",
+    "@types/koa-router": "^7.0.22",
+    "@types/lodash": "^4.14.64",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-replace": "^0.5.4",
+    "gulp-shell": "^0.6.3",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-typescript": "^3.1.7",
+    "gulpclass": "^0.1.2",
+    "ts-node": "^3.0.4",
+    "typescript": "^2.3.3"
+  }
+}
