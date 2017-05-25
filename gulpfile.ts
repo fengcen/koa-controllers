@@ -23,14 +23,6 @@ export class Gulpfile {
             .pipe(shell(['tsc']));
     }
 
-    @Task()
-    public npmPublish() {
-        return gulp.src('*.js', { read: false })
-            .pipe(shell([
-                'cd ./build/package && npm publish'
-            ]));
-    }
-
     /**
      * Copies all sources to the package directory.
      */
@@ -98,10 +90,5 @@ export class Gulpfile {
             'packageClearCompileDirectory',
             ['packagePreparePackageFile', 'packageReadmeFile']
         ];
-    }
-
-    @SequenceTask()
-    public publish() {
-        return ['package', 'npmPublish'];
     }
 }
