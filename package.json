@@ -7,6 +7,10 @@
   "repository": "https://github.com/fengcen/koa-controllers.git",
   "author": "fengcen <fengcen.love@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "gulp package",
+    "publish": "gulp publish"
+  },
   "dependencies": {
     "glob": "^7.1.2",
     "koa-bodyparser": "^4.2.0",
