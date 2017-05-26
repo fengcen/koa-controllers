@@ -16,6 +16,7 @@ import {
     RouterDetail,
 } from './meta/index';
 
+import { RequestParamError } from './error/index';
 import { validateValue } from './validation/index';
 
 const Multer = require('koa-multer');
@@ -92,8 +93,17 @@ export function addParam(target: any, propertyKey: string, index: number, inject
 
 function createRouterHandler(routerDetail: RouterDetail): any {
     return async (ctx: any, next: any) => {
-        await controllers[routerDetail.controller][routerDetail.controllerMethod].apply(
-            controllers[routerDetail.controller], await getHandlerInjectParams(ctx, routerDetail));
+        try {
+            await controllers[routerDetail.controller][routerDetail.controllerMethod].apply(
+                controllers[routerDetail.controller], await getHandlerInjectParams(ctx, routerDetail));
+        } catch (error) {
+            if (error instanceof RequestParamError) {
+                ctx.throw(400, error.message);
+            } else {
+                throw error;
+            }
+        }
+
         await next();
     };
 }
@@ -117,7 +127,7 @@ async function getHandlerInjectParams(ctx: any, routerDetail: RouterDetail): Pro
                 case 'request-param':
                     const requestParamMeta = paramMeta.additionalMeta as RequestParamMeta;
                     if (requestParamMeta == null) {
-                        throw new Error('request param options should not be null');
+                        throw new RequestParamError('request param options should not be null');
                     }
 
                     let parsedValue = getRequestParam(ctx, paramType, requestParamMeta);
@@ -125,7 +135,7 @@ async function getHandlerInjectParams(ctx: any, routerDetail: RouterDetail): Pro
                         if (!isNotRequired(requestParamMeta)) {
                             const defaultValue = getDefault(requestParamMeta);
                             if (defaultValue == null) {
-                                throw new Error('required request param is not present: ' + requestParamMeta.name);
+                                throw new RequestParamError('required request param is not present: ' + requestParamMeta.name);
                             }
                             parsedValue = defaultValue;
                         }
@@ -228,7 +238,7 @@ function convertValue(value: any, paramType: string, meta: RequestParamMeta): an
             } else {
                 const number = +value;
                 if (isNaN(number)) {
-                    throw new Error('request param parse fail: invalid number: ' + value);
+                    throw new RequestParamError('request param parse fail: invalid number: ' + value);
                 }
                 return number;
             }
@@ -243,7 +253,7 @@ function convertValue(value: any, paramType: string, meta: RequestParamMeta): an
                 return !!value;
             }
         default:
-            throw new Error('unsupport request param type: ' + paramType);
+            return value;
     }
 }
 
