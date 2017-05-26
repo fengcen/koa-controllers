@@ -1,4 +1,6 @@
-import { RequestParamMeta, RequestParamOptions, addParam } from '../index';
+import { RequestParamMeta, RequestParamOptions } from '../meta/index';
+
+import { addParam } from '../index';
 
 export function RequestParam(name: string, options?: RequestParamOptions) {
     return (target: any, propertyKey: string, index: number) => {

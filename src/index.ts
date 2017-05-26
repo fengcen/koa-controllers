@@ -6,6 +6,18 @@ import * as _ from 'lodash';
 import * as bodyParser from 'koa-bodyparser';
 import * as glob from 'glob';
 
+import {
+    ControllerOptions,
+    Decorator,
+    MethodParamMeta,
+    MethodParamMetas,
+    RequestMethod,
+    RequestParamMeta,
+    RouterDetail,
+} from './meta/index';
+
+import { validateValue } from './validation/index';
+
 const Multer = require('koa-multer');
 
 export * from './decorators/Controller';
@@ -13,51 +25,6 @@ export * from './decorators/Get';
 export * from './decorators/Post';
 export * from './decorators/Ctx';
 export * from './decorators/RequestParam';
-
-export type RequestMethod = 'get' | 'post';
-export type Decorator = 'ctx' | 'request-param';
-
-export interface MultipartOptions {
-    dest: string;
-    storage?: any;
-    limits?: UploadFileLimitOptions;
-}
-export interface UploadFileLimitOptions {
-    fileSize?: number;
-    files?: number;
-}
-export interface ControllerOptions {
-    multipart: MultipartOptions;
-}
-
-export class RequestParamMeta {
-    public name: string;
-    public options?: RequestParamOptions;
-}
-
-export interface RequestParamOptions {
-    enum?: any;
-    file?: boolean;
-    multiple?: boolean;
-    required?: boolean;
-    default?: any;
-}
-
-interface MethodParamMeta {
-    decorator: Decorator;
-    additionalMeta?: RequestParamMeta;
-}
-
-type MethodParamMetas = { [key: number]: MethodParamMeta };
-
-interface RouterDetail {
-    path: string;
-    requestMethod: RequestMethod;
-    controller: string;
-    controllerMethod: string;
-    paramTypes: any;
-    methodParamMetas?: MethodParamMetas;
-}
 
 const router = new Router();
 const controllers: { [key: string]: any } = {};
@@ -213,27 +180,29 @@ function isFile(meta: RequestParamMeta): boolean {
     return !!(meta && meta.options && meta.options.file);
 }
 
-function getRequestParam(ctx: any, paramType: string, requestParamMeta: RequestParamMeta): any {
-    if (isFile(requestParamMeta)) {
-        return getUploadFile(ctx, requestParamMeta);
+function getRequestParam(ctx: any, paramType: string, meta: RequestParamMeta): any {
+    if (isFile(meta)) {
+        return getUploadFile(ctx, meta);
     }
 
-    if (requestParamMeta === null) {
+    if (meta === null) {
         return undefined;
     }
 
     let value: any;
 
     if (ctx.req.method === 'GET') {
-        value = ctx.query[requestParamMeta.name];
+        value = ctx.query[meta.name];
     } else if (isWwwFormUrlencoded(ctx)) {
-        value = ctx.request.body[requestParamMeta.name];
+        value = ctx.request.body[meta.name];
     } else if (isMultipart(ctx)) {
-        value = ctx.req.body[requestParamMeta.name];
+        value = ctx.req.body[meta.name];
     }
 
     if (value != null) {
-        return convertValue(value, paramType, requestParamMeta);
+        const convertedValue = convertValue(value, paramType, meta);
+        validateValue(convertedValue, paramType, meta);
+        return convertedValue;
     }
 }
 

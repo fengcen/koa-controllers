@@ -16,7 +16,8 @@
     "koa-multer": "^1.0.1",
     "koa-router": "^7.2.0",
     "lodash": "^4.17.4",
-    "reflect-metadata": "^0.1.10"
+    "reflect-metadata": "^0.1.10",
+    "validator": "^7.0.0"
   },
   "devDependencies": {
     "@types/del": "^2.2.32",
@@ -29,6 +30,7 @@
     "@types/koa-bodyparser": "^3.0.23",
     "@types/koa-router": "^7.0.22",
     "@types/lodash": "^4.14.64",
+    "@types/validator": "^6.2.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
