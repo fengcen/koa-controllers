@@ -3,6 +3,23 @@ koa-controllers
 
 Koa controllers with TypeScript Decorators.
 
+# Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+    - [Router Documentation](#router-documentation)
+    - [Load Controllers](#load-controllers)
+    - [Controller](#controller)
+    - [Inject context](#inject-context)
+    - [Inject request parameters](#inject-request-parameters)
+        * [Optional parameter](#optional-parameter)
+        * [String parameter](#string-parameter)
+        * [Number parameter](#number-parameter)
+        * [Enum parameter](#enum-parameter)
+        * [Multipart file parameter](#multipart-file-parameter)
+        * [Multiple multipart files parameter](#multiple-multipart-files-parameter)
+        * [Other RequestParam options](#other-requestparam-options)
+    - [Validation](#validation)
+
 ## Prerequisites
 koa 2 or above.
 
@@ -19,6 +36,7 @@ yarn add koa-controllers
 ## Usage
 ### [Router Documentation](https://github.com/alexmingoia/koa-router)
 
+### Load Controllers
 Supported request method:
 ```
 @Get('/')
@@ -53,9 +71,7 @@ export class CloudController {
 }
 ```
 
-### Inject router parameters
-
-#### Inject context
+### Inject context
 
 ```typescript
 import { Controller, Get, Ctx } from 'koa-controllers';
@@ -69,9 +85,9 @@ export class CloudController {
 }
 ```
 
-#### Inject request parameters
+### Inject request parameters
 
-Optional parameter:
+#### Optional parameter
 ```typescript
 import { Controller, Get, RequestParam } from 'koa-controllers';
 
@@ -84,7 +100,7 @@ export class CloudController {
 }
 ```
 
-String parameter:
+#### String parameter
 ```typescript
 import { Controller, Get, RequestParam } from 'koa-controllers';
 
@@ -97,7 +113,7 @@ export class CloudController {
 }
 ```
 
-Number parameter:
+#### Number parameter
 ```typescript
 import { Controller, Get, RequestParam } from 'koa-controllers';
 
@@ -110,7 +126,7 @@ export class CloudController {
 }
 ```
 
-Enum parameter:
+#### Enum parameter
 ```typescript
 import { Controller, Get, RequestParam } from 'koa-controllers';
 
@@ -128,7 +144,7 @@ export class CloudController {
 }
 ```
 
-Multipart file parameter:
+#### Multipart file parameter
 ```typescript
 import { Controller, Get, RequestParam, MultipartFile } from 'koa-controllers';
 
@@ -146,7 +162,7 @@ export class CloudController {
 }
 ```
 
-Multiple multipart files parameter:
+#### Multiple multipart files parameter
 ```typescript
 import { Controller, Get, RequestParam, MultipartFile } from 'koa-controllers';
 
@@ -170,5 +186,47 @@ export class CloudController {
     required: false, // Defaults to true
     default: any // The default value to use as a fallback when the request parameter is not provided or has an empty value.
                  // Supplying a default value implicitly sets required to false.
+}
+```
+
+### Validation
+`@ReuestParam` support validation.
+
+Limit number value minimum and maximum:
+```typescript
+import { Controller, Get, RequestParam } from 'koa-controllers';
+
+@Controller
+export class CloudController {
+    @Get('/')
+    public index(@RequestParam('count', { min: 5, max: 10 }) count: number) {
+        console.log(count);
+    }
+}
+```
+
+Limit string minimum and maximum length:
+```typescript
+import { Controller, Get, RequestParam } from 'koa-controllers';
+
+@Controller
+export class CloudController {
+    @Get('/')
+    public index(@RequestParam('username', { min: 5, max: 10 }) username: string) {
+        console.log(username);
+    }
+}
+```
+
+Check string is email:
+```typescript
+import { Controller, Get, RequestParam } from 'koa-controllers';
+
+@Controller
+export class CloudController {
+    @Get('/')
+    public index(@RequestParam('email', { email: true }) email: string) {
+        console.log(email);
+    }
 }
 ```
