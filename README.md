@@ -33,6 +33,16 @@ or with [yarn](https://github.com/yarnpkg/yarn):
 yarn add koa-controllers
 ```
 
+`reflect-metadata` shim is required:
+
+`npm install reflect-metadata --save`
+
+and make sure to import it before you use koa-controllers:
+
+```typescript
+import "reflect-metadata";
+```
+
 ## Usage
 ### [Router Documentation](https://github.com/alexmingoia/koa-router)
 
