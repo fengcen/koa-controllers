@@ -3,12 +3,15 @@
   "private": true,
   "version": "0.1.3",
   "description": "Koa controllers with TypeScript Decorators.",
-  "main": "index.js",
+  "main": "build/index.js",
   "repository": "https://github.com/fengcen/koa-controllers.git",
   "author": "fengcen <fengcen.love@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "gulp package"
+    "dev": "tsc --watch",
+    "build": "gulp build",
+    "package": "gulp package",
+    "pub": "gulp publish"
   },
   "dependencies": {
     "glob": "^7.1.2",
@@ -17,6 +20,7 @@
     "koa-router": "^7.2.0",
     "lodash": "^4.17.4",
     "reflect-metadata": "^0.1.10",
+    "source-map-support": "^0.4.15",
     "validator": "^7.0.0"
   },
   "devDependencies": {
@@ -24,7 +28,6 @@
     "@types/glob": "^5.0.30",
     "@types/gulp": "^4.0.3",
     "@types/gulp-replace": "^0.0.30",
-    "@types/gulp-shell": "^0.0.30",
     "@types/gulp-sourcemaps": "^0.0.30",
     "@types/gulp-typescript": "^2.13.0",
     "@types/koa-bodyparser": "^3.0.23",
@@ -32,13 +35,12 @@
     "@types/lodash": "^4.14.64",
     "@types/validator": "^6.2.0",
     "del": "^2.2.2",
+    "fs-extra": "^3.0.1",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
-    "gulp-shell": "^0.6.3",
-    "gulp-sourcemaps": "^2.6.0",
     "gulp-typescript": "^3.1.7",
-    "gulpclass": "^0.1.2",
-    "ts-node": "^3.0.4",
-    "typescript": "^2.3.3"
+    "run-sequence": "^1.2.2",
+    "tslint": "^5.4.3",
+    "typescript": "^2.3.4"
   }
 }

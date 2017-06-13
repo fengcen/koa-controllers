@@ -12,8 +12,9 @@
         "target": "es5",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "outDir": "build/compiled",
+        "outDir": "build",
         "declaration": true,
+        "sourceMap": true,
         "types": [
             "node"
         ],
@@ -21,8 +22,7 @@
             "es2015"
         ]
     },
-    "exclude": [
-        "build",
-        "node_modules"
+    "include": [
+        "src/**/*"
     ]
 }
