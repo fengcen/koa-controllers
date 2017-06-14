@@ -27,6 +27,7 @@ export * from './decorators/Get';
 export * from './decorators/Post';
 export * from './decorators/Ctx';
 export * from './decorators/RequestParam';
+export * from './decorators/Before';
 export * from './interfaces/Middleware';
 
 const router = new Router();
@@ -58,7 +59,7 @@ export function useControllers(app: Koa, controllerFiles: string, options: Contr
     });
     _.each(controllerMethodRouters, routers => {
         _.each(routers, routerDetail => {
-            (router as any)[routerDetail.requestMethod](routerDetail.path, createRouterHandler(routerDetail));
+            (router as any)[routerDetail.requestMethod](routerDetail.path, ...createRouterHandler(routerDetail));
         });
     });
     app.use(router.routes())
@@ -71,14 +72,32 @@ export function addRouter(path: string, target: any, propertyKey: string, method
     const metas = controllerMethodParamMetas[controllerName] ?
         controllerMethodParamMetas[controllerName][propertyKey] : undefined;
     const paramTypes = Reflect.getMetadata('design:paramtypes', target, propertyKey);
-    methodRouters[propertyKey] = {
+    methodRouters[propertyKey] = _.merge(methodRouters[propertyKey], {
         path: path,
         requestMethod: method,
         controller: controllerName,
         paramTypes: paramTypes,
         controllerMethod: propertyKey,
         methodParamMetas: metas
-    };
+    });
+}
+
+export function addRouterMiddleware(middleware: any, target: any, propertyKey: string) {
+    const controllerName = target.constructor.name;
+    const methodRouters = getMethodRouters(controllerName);
+    let existBefores = false;
+    if (methodRouters[propertyKey]) {
+        const befores = methodRouters[propertyKey].befores;
+        if (befores) {
+            existBefores = true;
+            befores.push(middleware);
+        }
+    }
+    if (!existBefores) {
+        methodRouters[propertyKey] = _.merge(methodRouters[propertyKey], {
+            befores: [middleware]
+        });
+    }
 }
 
 export function addController(target: any) {
@@ -94,7 +113,13 @@ export function addParam(target: any, propertyKey: string, index: number, inject
 }
 
 function createRouterHandler(routerDetail: RouterDetail): any {
-    return async (ctx: any, next: any) => {
+    const handlers: any[] = [];
+    if (routerDetail.befores) {
+        _.each(routerDetail.befores, before => {
+            handlers.push((new (before as any)()).middleware);
+        });
+    }
+    handlers.push(async (ctx: any, next: any) => {
         try {
             await controllers[routerDetail.controller][routerDetail.controllerMethod].apply(
                 controllers[routerDetail.controller], await getHandlerInjectParams(ctx, routerDetail));
@@ -107,7 +132,8 @@ function createRouterHandler(routerDetail: RouterDetail): any {
         }
 
         await next();
-    };
+    });
+    return handlers;
 }
 
 async function getHandlerInjectParams(ctx: any, routerDetail: RouterDetail): Promise<any[]> {

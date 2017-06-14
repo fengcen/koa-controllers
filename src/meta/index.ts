@@ -1,3 +1,4 @@
+import { Middleware } from '../interfaces/Middleware';
 
 export type RequestMethod = 'get' | 'post';
 export type Decorator = 'ctx' | 'request-param';
@@ -45,5 +46,6 @@ export interface RouterDetail {
     controller: string;
     controllerMethod: string;
     paramTypes: any;
+    befores?: Middleware[];
     methodParamMetas?: MethodParamMetas;
 }
