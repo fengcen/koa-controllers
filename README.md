@@ -19,6 +19,7 @@ Koa controllers with TypeScript Decorators.
         * [Multiple multipart files parameter](#multiple-multipart-files-parameter)
         * [Other RequestParam options](#other-requestparam-options)
     - [Validation](#validation)
+    - [Before Middleware](#before-middleware)
 
 ## Prerequisites
 koa 2 or above.
@@ -73,7 +74,7 @@ Controller files in `controllers` directory:
 import { Controller, Get, Ctx } from 'koa-controllers';
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public async index( @Ctx ctx: any) {
         await ctx.render('/index');
@@ -87,7 +88,7 @@ export class CloudController {
 import { Controller, Get, Ctx } from 'koa-controllers';
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public async index( @Ctx ctx: any) {
         await ctx.render('/index');
@@ -102,7 +103,7 @@ export class CloudController {
 import { Controller, Get, RequestParam } from 'koa-controllers';
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public index(@RequestParam('username', { required: false }) username: string) {
         console.log(username);
@@ -115,7 +116,7 @@ export class CloudController {
 import { Controller, Get, RequestParam } from 'koa-controllers';
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public index(@RequestParam('username') username: string) {
         console.log(username);
@@ -128,7 +129,7 @@ export class CloudController {
 import { Controller, Get, RequestParam } from 'koa-controllers';
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public index(@RequestParam('count') count: number) {
         console.log(count);
@@ -146,7 +147,7 @@ enum Color {
 }
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public index(@RequestParam('color', { enum: Color }) color: Color) {
         console.log(color);
@@ -164,7 +165,7 @@ enum Color {
 }
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public index(@RequestParam('avatar', { file: true }) avatar: MultipartFile) {
         console.log(avatar);
@@ -182,7 +183,7 @@ enum Color {
 }
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public index(@RequestParam('photos', { file: true, multiple: true }) photos: MultipartFile[]) {
         console.log(photos);
@@ -207,7 +208,7 @@ Limit number value minimum and maximum:
 import { Controller, Get, RequestParam } from 'koa-controllers';
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public index(@RequestParam('count', { min: 5, max: 10 }) count: number) {
         console.log(count);
@@ -220,7 +221,7 @@ Limit string minimum and maximum length:
 import { Controller, Get, RequestParam } from 'koa-controllers';
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public index(@RequestParam('username', { min: 5, max: 10 }) username: string) {
         console.log(username);
@@ -233,10 +234,36 @@ Check string is email:
 import { Controller, Get, RequestParam } from 'koa-controllers';
 
 @Controller
-export class CloudController {
+export class MyController {
     @Get('/')
     public index(@RequestParam('email', { email: true }) email: string) {
         console.log(email);
+    }
+}
+```
+
+### Before Middleware
+```typescript
+import { Controller, Before, Get, Middleware } from 'koa-controllers';
+
+@Controller
+export class MyController {
+    @Get('/')
+    @Before(Authenticate)
+    public index(@Ctx ctx: any) {
+        console.log(ctx.user);
+    }
+}
+
+class Authenticate implements Middleware {
+    public middleware = async (ctx: any, next: any) => {
+        const user = await getUser(ctx);
+        if (user == null) {
+            ctx.redirect('/signin');
+        } else {
+            ctx.user = user;
+            await next();   // Notice: Don't forget `await`, or you will get '404 NOT FOUND'.
+        }
     }
 }
 ```
