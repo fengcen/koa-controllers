@@ -7,6 +7,7 @@
   "repository": "https://github.com/fengcen/koa-controllers.git",
   "author": "fengcen <fengcen.love@gmail.com>",
   "license": "MIT",
+  "types": "build/index.d.ts",
   "scripts": {
     "dev": "tsc --watch",
     "build": "gulp build",
