@@ -27,6 +27,7 @@ export * from './decorators/Get';
 export * from './decorators/Post';
 export * from './decorators/Ctx';
 export * from './decorators/RequestParam';
+export * from './interfaces/Middleware';
 
 const router = new Router();
 const controllers: { [key: string]: any } = {};
