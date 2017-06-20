@@ -1,7 +1,7 @@
 {
   "name": "koa-controllers",
   "private": true,
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Koa controllers with TypeScript Decorators.",
   "main": "build/index.js",
   "repository": "https://github.com/fengcen/koa-controllers.git",
