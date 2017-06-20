@@ -1,0 +1,34 @@
+language: node_js
+
+branches:
+  only:
+    - master
+    - next
+
+cache:
+  directories:
+    - $HOME/.npm
+    - $HOME/.yarn-cache
+
+matrix:
+  include:
+    - os: linux
+      node_js: "8"
+    - os: linux
+      node_js: "6"
+    - os: linux
+      node_js: "4.5"
+    - os: linux
+      node_js: "4"
+    - os: osx
+      node_js: "8"
+  allow_failures:
+    - os: osx
+  fast_finish: true
+
+install:
+  - yarn install --frozen-lockfile
+
+notifications:
+  on_success: never
+  on_failure: always
