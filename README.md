@@ -1,6 +1,8 @@
 koa-controllers
 ---------------
 
+[![Build Status](https://travis-ci.org/fengcen/koa-controllers.svg?branch=master)](https://travis-ci.org/fengcen/koa-controllers)
+[![Build status](https://ci.appveyor.com/api/projects/status/er7h5oy4rl5yb5b0?svg=true)](https://ci.appveyor.com/project/fengcen/koa-controllers)
 [![npm](https://img.shields.io/npm/v/koa-controllers.svg)](https://www.npmjs.com/package/koa-controllers)
 [![npm](https://img.shields.io/npm/dm/koa-controllers.svg)](https://www.npmjs.com/package/koa-controllers)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/fengcen/koa-controllers/master/LICENSE)
