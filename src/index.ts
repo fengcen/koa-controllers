@@ -1,5 +1,5 @@
-import 'reflect-metadata';
 import 'source-map-support/register';
+import 'reflect-metadata';
 
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
