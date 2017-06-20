@@ -267,3 +267,7 @@ class Authenticate implements Middleware {
     }
 }
 ```
+
+## LICENSE
+webpub is primarily distributed under the terms of the MIT license.
+See [LICENSE](LICENSE) for details.
