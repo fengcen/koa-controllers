@@ -29,8 +29,6 @@
     "@types/glob": "^5.0.30",
     "@types/gulp": "^4.0.3",
     "@types/gulp-replace": "^0.0.30",
-    "@types/gulp-sourcemaps": "^0.0.30",
-    "@types/gulp-typescript": "^2.13.0",
     "@types/koa-bodyparser": "^3.0.23",
     "@types/koa-router": "^7.0.22",
     "@types/lodash": "^4.14.64",
@@ -39,9 +37,10 @@
     "fs-extra": "^3.0.1",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
-    "gulp-typescript": "^3.1.7",
     "run-sequence": "^1.2.2",
     "tslint": "^5.4.3",
+    "tslint-config-airbnb": "^5.2.0",
+    "tslint-eslint-rules": "^4.1.1",
     "typescript": "^2.3.4"
   }
 }

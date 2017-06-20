@@ -1,3 +1,3 @@
 export interface Middleware {
-    middleware(ctx: any, next: any): void;
+  middleware(ctx: any, next: any): void;
 }

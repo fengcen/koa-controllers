@@ -11,52 +11,52 @@ const outDir = tsconfig.compilerOptions.outDir;
 const packageDir = 'package';
 
 gulp.task('clean', () => {
-    return del([
-        outDir + '/**',
-        packageDir + '/**'
-    ]);
+  return del([
+    outDir + '/**',
+    packageDir + '/**'
+  ]);
 });
 
 gulp.task('build', cb => {
-    exec('tsc', (err, stdout, stderr) => {
-        if (stderr.length > 0) {
-            console.log(stderr);
-        }
-        cb(err);
-    });
+  exec('tsc', (err, stdout, stderr) => {
+    if (stderr.length > 0) {
+      console.log(stderr);
+    }
+    cb(err);
+  });
 });
 
 gulp.task('packagePreparePackageFile', () => {
-    return gulp.src('./package.json')
-        .pipe(replace('"private": true,', '"private": false,'))
-        .pipe(gulp.dest(packageDir));
+  return gulp.src('./package.json')
+    .pipe(replace('"private": true,', '"private": false,'))
+    .pipe(gulp.dest(packageDir));
 });
 
 gulp.task('copyBuildToPackage', () => {
-    fs.copySync(outDir, packageDir + '/' + outDir);
+  fs.copySync(outDir, packageDir + '/' + outDir);
 });
 
 gulp.task('copyRequiredFiles', () => {
-    const files = ['yarn.lock', 'README.md'];
-    files.forEach(file => {
-        fs.copySync(file, packageDir + '/' + file);
-    });
+  const files = ['yarn.lock', 'README.md'];
+  files.forEach(file => {
+    fs.copySync(file, packageDir + '/' + file);
+  });
 });
 
 gulp.task('npmPublish', cb => {
-    process.chdir(packageDir);
-    exec('npm publish', (err, stdout, stderr) => {
-        if (stderr.length > 0) {
-            console.log(stderr);
-        }
-        cb(err);
-    });
+  process.chdir(packageDir);
+  exec('npm publish', (err, stdout, stderr) => {
+    if (stderr.length > 0) {
+      console.log(stderr);
+    }
+    cb(err);
+  });
 });
 
 gulp.task('package', () => {
-    runSequence('clean', 'build', 'copyBuildToPackage', 'copyRequiredFiles', 'packagePreparePackageFile');
+  runSequence('clean', 'build', 'copyBuildToPackage', 'copyRequiredFiles', 'packagePreparePackageFile');
 });
 
 gulp.task('publish', () => {
-    runSequence('clean', 'build', 'copyBuildToPackage', 'copyRequiredFiles', 'packagePreparePackageFile', 'npmPublish');
+  runSequence('clean', 'build', 'copyBuildToPackage', 'copyRequiredFiles', 'packagePreparePackageFile', 'npmPublish');
 });
