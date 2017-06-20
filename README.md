@@ -1,6 +1,10 @@
 koa-controllers
 ---------------
 
+[![npm](https://img.shields.io/npm/v/koa-controllers.svg)](https://www.npmjs.com/package/koa-controllers)
+[![npm](https://img.shields.io/npm/dm/koa-controllers.svg)](https://www.npmjs.com/package/koa-controllers)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/fengcen/koa-controllers/master/LICENSE)
+
 Koa controllers with TypeScript Decorators.
 
 # Table of Contents
@@ -269,5 +273,5 @@ class Authenticate implements Middleware {
 ```
 
 ## LICENSE
-webpub is primarily distributed under the terms of the MIT license.
+koa-controllers is primarily distributed under the terms of the MIT license.
 See [LICENSE](LICENSE) for details.
