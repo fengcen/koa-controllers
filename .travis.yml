@@ -15,13 +15,15 @@ matrix:
     - os: linux
       node_js: "8"
     - os: linux
-      node_js: "6"
+      node_js: "7"
     - os: linux
-      node_js: "4.5"
-    - os: linux
-      node_js: "4"
+      node_js: "7.6"
     - os: osx
       node_js: "8"
+    - os: osx
+      node_js: "7"
+    - os: osx
+      node_js: "7.6"
   allow_failures:
     - os: osx
   fast_finish: true

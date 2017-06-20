@@ -26,6 +26,9 @@
       "json"
     ]
   },
+  "engines": {
+    "node": ">=7.6.0"
+  },
   "dependencies": {
     "glob": "^7.1.2",
     "koa-bodyparser": "^4.2.0",

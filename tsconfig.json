@@ -1,28 +1,28 @@
 {
-    "compilerOptions": {
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "module": "commonjs",
-        "strictNullChecks": true,
-        "alwaysStrict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true,
-        "target": "es5",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "outDir": "build",
-        "declaration": true,
-        "sourceMap": true,
-        "types": [
-            "node"
-        ],
-        "lib": [
-            "es2015"
-        ]
-    },
-    "include": [
-        "src/**/*"
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "module": "commonjs",
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "target": "es2015",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "build",
+    "declaration": true,
+    "sourceMap": true,
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "es2015"
     ]
+  },
+  "include": [
+    "src/**/*"
+  ]
 }

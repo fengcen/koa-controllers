@@ -1,6 +1,7 @@
 koa-controllers
 ---------------
 
+[![node](https://img.shields.io/node/v/koa-controllers.svg)](https://nodejs.org)
 [![Build Status](https://travis-ci.org/fengcen/koa-controllers.svg?branch=master)](https://travis-ci.org/fengcen/koa-controllers)
 [![Build status](https://ci.appveyor.com/api/projects/status/er7h5oy4rl5yb5b0?svg=true)](https://ci.appveyor.com/project/fengcen/koa-controllers)
 [![npm](https://img.shields.io/npm/v/koa-controllers.svg)](https://www.npmjs.com/package/koa-controllers)
@@ -29,6 +30,8 @@ Koa controllers with TypeScript Decorators.
 
 ## Prerequisites
 koa 2 or above.
+
+Node >= 7.6.0
 
 
 ## Installation
