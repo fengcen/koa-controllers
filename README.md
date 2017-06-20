@@ -10,6 +10,11 @@ koa-controllers
 
 Koa controllers with TypeScript Decorators.
 
+## Prerequisites
+koa 2 or above.
+
+Node >= 7.6.0
+
 # Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
@@ -27,12 +32,6 @@ Koa controllers with TypeScript Decorators.
         * [Other RequestParam options](#other-requestparam-options)
     - [Validation](#validation)
     - [Before Middleware](#before-middleware)
-
-## Prerequisites
-koa 2 or above.
-
-Node >= 7.6.0
-
 
 ## Installation
 ```
