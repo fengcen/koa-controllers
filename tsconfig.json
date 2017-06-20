@@ -15,6 +15,7 @@
     "outDir": "build",
     "declaration": true,
     "sourceMap": true,
+    "newLine": "LF",
     "types": [
       "node"
     ],
