@@ -1,5 +1,5 @@
 koa-controllers
----------------
+===============
 
 [![node](https://img.shields.io/node/v/koa-controllers.svg)](https://nodejs.org)
 [![Build Status](https://travis-ci.org/fengcen/koa-controllers.svg?branch=master)](https://travis-ci.org/fengcen/koa-controllers)
