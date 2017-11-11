@@ -65,7 +65,7 @@ Supported request method:
 Load all controller modules:
 ```typescript
 import * as Koa from 'koa';
-import { userControllers } from 'koa-controllers';
+import { useControllers } from 'koa-controllers';
 
 const app = new Koa();
 useControllers(app, __dirname + '/controllers/*.js', {
