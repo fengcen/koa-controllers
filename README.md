@@ -1,6 +1,9 @@
 koa-controllers
 ===============
 
+[![Project Status: Abandoned – Initial development has started, but there has not yet been a stable, usable release; the project has been abandoned and the author(s) do not intend on continuing development.](https://www.repostatus.org/badges/latest/abandoned.svg)](https://www.repostatus.org/#abandoned)
+
+
 [![node](https://img.shields.io/node/v/koa-controllers.svg)](https://nodejs.org)
 [![Build Status](https://travis-ci.org/fengcen/koa-controllers.svg?branch=master)](https://travis-ci.org/fengcen/koa-controllers)
 [![Build status](https://ci.appveyor.com/api/projects/status/er7h5oy4rl5yb5b0?svg=true)](https://ci.appveyor.com/project/fengcen/koa-controllers)
